@@ -1,3 +1,50 @@
 #root {
   color: red;
 }
+
+#myInput {
+  background-image: url('/css/searchicon.png');
+  /* Add a search icon to input */
+  background-position: 10px 12px;
+  /* Position the search icon */
+  background-repeat: no-repeat;
+  /* Do not repeat the icon image */
+  width: 50%;
+  /* Full-width */
+  font-size: 16px;
+  /* Increase font-size */
+  padding: 12px 20px 12px 40px;
+  /* Add some padding */
+  border: 1px solid #ddd;
+  /* Add a grey border */
+  margin: 40px 10px 40px 100px;
+  /* Add some space below the input */
+}
+
+.listE {
+  display: grid;
+  grid-template-rows: 1fr 1fr ;
+  grid-template-columns: 1fr 1fr 1fr ;
+  width: 72%;
+  background-color: #888;
+  margin: 20px 40px 10px 80px;
+  border: 1px solid #000;
+  border-radius: 10%;
+
+}
+
+.listE > h1{
+  padding: 20px;
+  font-size: 1.4em;
+  color: #fff;
+  grid-template-areas: 1/ 2/ 2/ 3;
+}
+
+.listE > h2 {
+  grid-template-areas: 2/ 2/ 3/ 3 ;
+}
+
+
+.hide{
+  display: none;
+}
