@@ -1,20 +1,20 @@
 //You can edit ALL of the code here
+
+const allEpisodes = getAllEpisodes();
 function setup() {
-  const allEpisodes = getAllEpisodes();
-  makePageForEpisodes(allEpisodes);
+  getEpisodesFromURL();
+
+  //makePageForEpisodes(allEpisodes);
 }
 
-let episodeData = [];
+const rootElem = document.getElementById("root");
 
 function makePageForEpisodes(episodeList) {
-  const rootElem = document.getElementById("root");
-
-  // rootElem.textContent = `Got ${episodeList.length} episode(s)`;
+  //getEpisodesFromURL();
   var ulEpisodes = document.createElement("ul");
-  ulEpisodes.setAttribute("id", "myUL");
   rootElem.appendChild(ulEpisodes);
-
-  episodeData = episodeList.map((episode) => {
+  ulEpisodes.setAttribute("id", "myUL");
+  episodeList.forEach((episode) => {
     var liEpisodes = document.createElement("li");
     liEpisodes.className = "listE";
     var picEpisodes = document.createElement("img");
@@ -29,76 +29,63 @@ function makePageForEpisodes(episodeList) {
     liEpisodes.appendChild(numEpisodes);
     //
     var headingEpi = document.createElement("h2");
-    // history.setAttribute("id", "head2");
     headingEpi.innerHTML = episode.name;
     liEpisodes.appendChild(headingEpi);
     //
     var summaryEpi = document.createElement("div");
-    // summaryEpi.setAttribute("id", "summary");
     summaryEpi.innerHTML = episode.summary;
     liEpisodes.appendChild(summaryEpi);
     ulEpisodes.appendChild(liEpisodes);
-
-    return { name: episode.name, summary: episode.summary };
   });
 }
 
-// for (let i = 0; i <= episodeList.length; i++) {
-//     var liEpisodes = document.createElement("li");
-//     liEpisodes.className = "listE";
+var inputs = document.getElementById("myInput");
+function searchEpisodes() {
+  inputs.addEventListener("input", (e) => {
+    let value = e.target.value.toLowerCase();
+    let visibleEpi = allEpisodes.filter((epidata) => {
+      return (
+        epidata.name.toLowerCase().includes(value) ||
+        epidata.summary.toLowerCase().includes(value)
+      );
+    });
+    rootElem.innerHTML = "";
 
-//     //
-//     var picEpisodes = document.createElement("img");
-//     picEpisodes.src = episodeList[i].image.medium;
-//     liEpisodes.appendChild(picEpisodes);
-//     //
-//     var numEpisodes = document.createElement("h1");
-//     var numList = " ";
-//     if (episodeList[i].number < 10) {
-//       numList = `E0${episodeList[i].number}`;
-//     } else numList = `E${episodeList[i].number}`;
-//     numEpisodes.innerHTML = `S0${episodeList[i].season}` + "-" + numList;
-//     liEpisodes.appendChild(numEpisodes);
-//     //
-//     var headingEpi = document.createElement("h2");
-//     // history.setAttribute("id", "head2");
-//     headingEpi.innerHTML = episodeList[i].name;
-//     liEpisodes.appendChild(headingEpi);
-//     //
-//     var summaryEpi = document.createElement("div");
-//     // summaryEpi.setAttribute("id", "summary");
-//     summaryEpi.innerHTML = episodeList[i].summary;
-//     liEpisodes.appendChild(summaryEpi);
-//     ulEpisodes.appendChild(liEpisodes);
-//   }
-// }
+    makePageForEpisodes(visibleEpi);
 
-// var list = document.querySelectorAll("li");
-// var inputs = document.getElementById("myInput");
-// inputs.addEventListener("input", (e) => {
-//   const value = e.target.value;
-//   var epiH2 = document.querySelectorAll("h2");
-//   var sumEpi = document.querySelectorAll("div");
+    var display = document.getElementById("display-label");
+    display.innerHTML = "";
+    display.innerHTML =
+      "Displaying" + visibleEpi.length + "/" + allEpisodes.length;
+  });
+}
 
-//   for (i = 0; i < list.length; i++) {
-//     let txtValue =
-//       epiH2[i].innerText.includes(value) || sumEpi[i].innerText.includes(value);
+searchEpisodes();
 
-//     if (txtValue.toUpperCase().indexOf(filter) > -1) {
-//       list[i].style.display = "";
-//     } else {
-//       list[i].style.display = "none";
-//     }
-// console.log(value);
-// list.forEach((epi) => {
-//   var epiH2 = document.querySelectorAll("h2");
-//   console.log(epiH2);
-//   var sumEpi = document.querySelectorAll("div");
-//   const visibleEpi =
-//     epiH2.innerText.includes(value) || sumEpi.innerText.includes(value);
-//   epi.classList.toggle("hide", !visibleEpi);
-//     // });
-//   }
-// });
+function dropdownEpi() {
+  var divTop = document.getElementById("selectEpi");
+
+  for (var i = 0; i < allEpisodes.length; i++) {
+    var opt = document.createElement("option");
+    opt.setAttribute("value", allEpisodes[i].id);
+    opt.innerHTML = allEpisodes[i].season + allEpisodes[i].name;
+    divTop.appendChild(opt);
+  }
+
+  divTop.addEventListener("change", function () {
+    let selectedVal = this.value;
+    let selectedEpisode = allEpisodes.filter((x) => x.id == selectedVal);
+
+    rootElem.innerHTML = "";
+
+    makePageForEpisodes(selectedEpisode);
+
+    var display = document.getElementById("display-label");
+    display.innerHTML =
+      "Displaying" + selectedEpisode.length + "/" + allEpisodes.length;
+  });
+}
+
+dropdownEpi();
 
 window.onload = setup;
