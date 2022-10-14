@@ -2,7 +2,7 @@
 
 const allEpisodes = getAllEpisodes();
 function setup() {
-  getEpisodesFromURL();
+  makePageForEpisodes(allEpisodes);
 }
 
 const rootElem = document.getElementById("root");
@@ -80,7 +80,19 @@ function dropdownEpi() {
   for (var i = 0; i < allEpisodes.length; i++) {
     var opt = document.createElement("option");
     opt.setAttribute("value", allEpisodes[i].id);
-    opt.innerHTML = allEpisodes[i].season + allEpisodes[i].name;
+
+    var numList = " ";
+    if (allEpisodes[i].number < 10) {
+      numList = `E0${allEpisodes[i].number}`;
+    } else numList = `E${allEpisodes[i].number}`;
+
+    opt.innerHTML =
+      "S0" +
+      allEpisodes[i].season +
+      "-" +
+      numList +
+      "   ---   " +
+      allEpisodes[i].name;
     divTop.appendChild(opt);
   }
 
