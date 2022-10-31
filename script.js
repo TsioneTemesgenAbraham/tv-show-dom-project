@@ -1,10 +1,43 @@
 //You can edit ALL of the code here
 
-const allEpisodes = getAllEpisodes();
-function setup() {
-  makePageForEpisodes(allEpisodes);
+// LEVEL 350  ------ MAKING A GET REQUEST ------
+
+function getUrl() {
+  let url = "https://api.tvmaze.com/shows/82/episodes";
+  const allEpiFromUrl = [];
+  fetch(url)
+    .then((response) => response.json())
+    .then((data) => {
+      data.forEach((ep) => {
+        allEpiFromUrl.push(ep);
+      });
+      makePageForEpisodes(allEpiFromUrl);
+      dropdownEpi(allEpiFromUrl);
+      searchEpisodes(allEpiFromUrl);
+      console.log(allEpiFromUrl);
+    });
 }
 
+const allShows = getAllShows();
+
+function setup() {
+  getUrl();
+  dropdownShow(allShows);
+}
+
+// function allfun(g) {
+//   makePageForEpisodes(g);
+//   dropdownEpi(g);
+//   searchEpisodes(g);
+// }
+// const allEpisodes = getAllEpisodes();
+// function setup() {
+//   makePageForEpisodes(allEpisodes);
+//   dropdownEpi(allEpisodes);
+
+// }
+
+// console.log(allShows);
 const rootElem = document.getElementById("root");
 
 // LEVEL 100   ------ EPISODE DISPLAY -----
@@ -14,7 +47,7 @@ function makePageForEpisodes(episodeList) {
   rootElem.appendChild(ulEpisodes);
   ulEpisodes.setAttribute("id", "myUL");
 
-  episodeList.forEach((episode) => {
+  episodeList.map((episode) => {
     var liEpisodes = document.createElement("li");
     liEpisodes.className = "listE";
 
@@ -52,7 +85,7 @@ function makePageForEpisodes(episodeList) {
 // LEVEL 200 ----- SEARCH BAR -----
 
 var inputs = document.getElementById("myInput");
-function searchEpisodes() {
+function searchEpisodes(allEpisodes) {
   inputs.addEventListener("input", (e) => {
     let value = e.target.value.toLowerCase();
     let visibleEpi = allEpisodes.filter((epidata) => {
@@ -66,15 +99,13 @@ function searchEpisodes() {
     var display = document.getElementById("display-label");
     display.innerHTML = "";
     display.innerHTML =
-      "Displaying" + visibleEpi.length + "/" + allEpisodes.length;
+      "Displaying : " + visibleEpi.length + "/" + allEpisodes.length;
   });
 }
 
-searchEpisodes();
-
 // LEVEL 300 ----- DROPDOWN OPTIONS -----
 
-function dropdownEpi() {
+function dropdownEpi(allEpisodes) {
   var divTop = document.getElementById("selectEpi");
 
   for (var i = 0; i < allEpisodes.length; i++) {
@@ -98,7 +129,9 @@ function dropdownEpi() {
 
   divTop.addEventListener("change", function () {
     let selectedVal = this.value;
-    let selectedEpisode = allEpisodes.filter((x) => x.id == selectedVal);
+    let selectedEpisode = allEpisodes.filter((x) => {
+      return x.id == selectedVal;
+    });
 
     rootElem.innerHTML = "";
 
@@ -106,10 +139,47 @@ function dropdownEpi() {
 
     var display = document.getElementById("display-label");
     display.innerHTML =
-      "Displaying" + selectedEpisode.length + "/" + allEpisodes.length;
+      "Displaying : " + selectedEpisode.length + "/" + allEpisodes.length;
   });
 }
 
-dropdownEpi();
+function dropdownShow(allShows) {
+  let divShow = document.getElementById("selectShow");
+
+  for (let i = 0; i < allShows.length; i++) {
+    var opt = document.createElement("option");
+    opt.setAttribute("value", allShows[i].id);
+    allShows.sort(function (a, b) {
+      var nameA = a.name.toLowerCase(),
+        nameB = b.name.toLowerCase();
+      if (nameA < nameB) return -1;
+      if (nameA > nameB) return 1;
+      return 0;
+    });
+
+    opt.innerHTML = allShows[i].name;
+    divShow.appendChild(opt);
+  }
+
+  divShow.addEventListener("change", function () {
+    var divTop = document.getElementById("selectEpi");
+
+    let showValue = this.value;
+    const allEpisodesFromUrl = [];
+    fetch(`https://api.tvmaze.com/shows/${showValue}/episodes`)
+      .then((response) => response.json())
+      .then((data) =>
+        data.forEach((epi) => {
+          allEpisodesFromUrl.push(epi);
+        })
+      );
+    console.log(allEpisodesFromUrl);
+    searchEpisodes(allEpisodesFromUrl);
+    dropdownEpi(allEpisodesFromUrl);
+
+    makePageForEpisodes(allEpisodesFromUrl);
+    // allfun(allEpisodesFromUrl);
+  });
+}
 
 window.onload = setup;
