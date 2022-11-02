@@ -1,7 +1,7 @@
-#root {
-  color: red;
+/* #root {
+  
   background-color: darkslategrey;
-}
+} */
 
 #myInput {
   /* background-image: url('/css/searchicon.png'); */
@@ -49,3 +49,73 @@
 .hide{
   display: none;
 }
+
+#home {
+  background-color: #1A1A1D;
+}
+
+
+.show {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 2fr;
+  width: auto;
+  margin: 100px 210px 50px 210px;
+  padding: 50px;
+  border: 2px solid;
+  background-color: #6F2232;
+
+
+}
+
+
+
+
+
+
+
+.show img {
+  grid-area: 1/1/1/1;
+}
+
+.show h1 {
+  grid-area: 1/2/1/2;
+  margin: 5px 20px 10px 98px;
+}
+
+.show p {
+  grid-area: 1/2/1/2;
+  margin: 90px 70px 10px 50px;
+}
+
+.show p span {
+  grid-area: 1/2/1/2;
+  margin: 95px 70px 10px 50px;
+}
+
+.show h3 {
+  grid-area: 1/2/1/2;
+  margin: 60px 70px 10px 98px;
+}
+
+.show h4 {
+  grid-area: 1/2/1/2;
+  margin: 138px 70px 10px 100px;
+}
+
+
+
+.button.play {
+  grid-area: 1/2/1/2;
+  box-sizing: border-box;
+  width: 74px;
+  height: 74px;
+  margin: 50px 20px 10px 550px;
+  border-style: solid;
+  border-width: 37px;
+  border-color: #202020;
+  border-width: 37px 0px 37px 74px;
+  border-color: #6F2232 #6F2232 #6F2232 black;
+  box-shadow: 5px 10px 8px 10px #202020;
+}
+

@@ -1,12 +1,18 @@
 //You can edit ALL of the code here
-
+// const home = document.getElementById("home");
 const rootElem = document.getElementById("root");
 const searchBox = document.getElementById("myInput");
 const display = document.getElementById("display-label");
+const divSelectAndSearchEpisodes = document.getElementById("top-part");
+const topDivShowDropdown = document.getElementById("topPart2");
+const home = document.getElementById("home");
 
 // LEVEL 350  ------ MAKING A GET REQUEST ------
 
 function getUrl(showValue) {
+  divSelectAndSearchEpisodes.style.display = "block";
+  topDivShowDropdown.style.display = "none";
+  home.style.display = "none";
   let url = `https://api.tvmaze.com/shows/${showValue}/episodes`;
   const allEpiFromUrl = [];
   fetch(url)
@@ -19,6 +25,7 @@ function getUrl(showValue) {
       divTop.innerText = " ";
       searchBox.innerText = " ";
       display.innerHTML = " ";
+
       makePageForEpisodes(allEpiFromUrl);
       dropdownEpi(allEpiFromUrl);
       searchEpisodes(allEpiFromUrl);
@@ -29,9 +36,9 @@ function getUrl(showValue) {
 const allShows = getAllShows();
 
 function setup() {
-  // getUrl();
-
   dropdownShow(allShows);
+  makeShowList(allShows);
+  searchEpisodes(allShows);
 }
 
 // const allEpisodes = getAllEpisodes();
@@ -50,7 +57,7 @@ function makePageForEpisodes(episodeList) {
 
   episodeList.map((episode) => {
     var liEpisodes = document.createElement("li");
-    liEpisodes.className = "listE";
+    liEpisodes.className = "show";
 
     //    FOR MEDIUM IMG
 
@@ -144,7 +151,7 @@ function dropdownEpi(allEpisodes) {
 
 // LEVEL 400 ----- SHOW DROPDOWN ----
 
-function dropdownShow(allShows) {
+function dropdownShow() {
   let divShow = document.getElementById("selectShow");
 
   for (let i = 0; i < allShows.length; i++) {
@@ -169,4 +176,51 @@ function dropdownShow(allShows) {
   });
 }
 
+function makeShowList() {
+  divSelectAndSearchEpisodes.style.display = "none";
+  let showUL = document.createElement("ul");
+  home.appendChild(showUL);
+
+  allShows.map((show) => {
+    let showLI = document.createElement("li");
+    showLI.className = "show";
+    showLI.setAttribute("id", "shows");
+    showLI.setAttribute("value", show.id);
+
+    let showImg = document.createElement("img");
+    showImg.src = show.image.medium;
+    showLI.appendChild(showImg);
+
+    let showTi = document.createElement("h1");
+    showTi.innerText = show.name;
+    showLI.appendChild(showTi);
+
+    let play = document.createElement("button");
+    play.setAttribute("id", "button");
+    play.setAttribute("value", show.id);
+    // play.className = "button play";
+    showLI.appendChild(play);
+
+    let showGe = document.createElement("h3");
+    showGe.innerText = show.genres.join("\n");
+    showLI.appendChild(showGe);
+
+    let showRa = document.createElement("h4");
+    showRa.innerText = show.rating.average;
+    showLI.appendChild(showRa);
+
+    let showSum = document.createElement("p");
+    let sumSpan = document.createElement("span");
+    sumSpan.innerText = "Read more...";
+    sumSpan.style.fontWeight = "bold";
+    //create an event listener
+    showSum.innerHTML = show.summary.replace(/^(.{220}[^\s]*).*/, "$1");
+    showSum.appendChild(sumSpan);
+    showLI.appendChild(showSum);
+
+    showUL.appendChild(showLI);
+  });
+}
+
+function returnHome() {}
 window.onload = setup;
