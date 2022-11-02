@@ -1,9 +1,13 @@
 //You can edit ALL of the code here
 
+const rootElem = document.getElementById("root");
+const searchBox = document.getElementById("myInput");
+const display = document.getElementById("display-label");
+
 // LEVEL 350  ------ MAKING A GET REQUEST ------
 
-function getUrl() {
-  let url = "https://api.tvmaze.com/shows/82/episodes";
+function getUrl(showValue) {
+  let url = `https://api.tvmaze.com/shows/${showValue}/episodes`;
   const allEpiFromUrl = [];
   fetch(url)
     .then((response) => response.json())
@@ -11,6 +15,10 @@ function getUrl() {
       data.forEach((ep) => {
         allEpiFromUrl.push(ep);
       });
+      rootElem.innerText = " ";
+      divTop.innerText = " ";
+      searchBox.innerText = " ";
+      display.innerHTML = " ";
       makePageForEpisodes(allEpiFromUrl);
       dropdownEpi(allEpiFromUrl);
       searchEpisodes(allEpiFromUrl);
@@ -21,24 +29,17 @@ function getUrl() {
 const allShows = getAllShows();
 
 function setup() {
-  getUrl();
+  // getUrl();
+
   dropdownShow(allShows);
 }
 
-// function allfun(g) {
-//   makePageForEpisodes(g);
-//   dropdownEpi(g);
-//   searchEpisodes(g);
-// }
 // const allEpisodes = getAllEpisodes();
 // function setup() {
 //   makePageForEpisodes(allEpisodes);
 //   dropdownEpi(allEpisodes);
 
 // }
-
-// console.log(allShows);
-const rootElem = document.getElementById("root");
 
 // LEVEL 100   ------ EPISODE DISPLAY -----
 
@@ -104,10 +105,8 @@ function searchEpisodes(allEpisodes) {
 }
 
 // LEVEL 300 ----- DROPDOWN OPTIONS -----
-
+var divTop = document.getElementById("selectEpi");
 function dropdownEpi(allEpisodes) {
-  var divTop = document.getElementById("selectEpi");
-
   for (var i = 0; i < allEpisodes.length; i++) {
     var opt = document.createElement("option");
     opt.setAttribute("value", allEpisodes[i].id);
@@ -143,6 +142,8 @@ function dropdownEpi(allEpisodes) {
   });
 }
 
+// LEVEL 400 ----- SHOW DROPDOWN ----
+
 function dropdownShow(allShows) {
   let divShow = document.getElementById("selectShow");
 
@@ -162,23 +163,9 @@ function dropdownShow(allShows) {
   }
 
   divShow.addEventListener("change", function () {
-    var divTop = document.getElementById("selectEpi");
-
     let showValue = this.value;
-    const allEpisodesFromUrl = [];
-    fetch(`https://api.tvmaze.com/shows/${showValue}/episodes`)
-      .then((response) => response.json())
-      .then((data) =>
-        data.forEach((epi) => {
-          allEpisodesFromUrl.push(epi);
-        })
-      );
-    console.log(allEpisodesFromUrl);
-    searchEpisodes(allEpisodesFromUrl);
-    dropdownEpi(allEpisodesFromUrl);
 
-    makePageForEpisodes(allEpisodesFromUrl);
-    // allfun(allEpisodesFromUrl);
+    getUrl(showValue);
   });
 }
 
