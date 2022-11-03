@@ -38,6 +38,7 @@ const allShows = getAllShows();
 function setup() {
   dropdownShow(allShows);
   makeShowList(allShows);
+
   searchEpisodes(allShows);
 }
 
@@ -198,7 +199,7 @@ function makeShowList() {
     let play = document.createElement("button");
     play.setAttribute("id", "button");
     play.setAttribute("value", show.id);
-    // play.className = "button play";
+    play.className = "button play";
     showLI.appendChild(play);
 
     let showGe = document.createElement("h3");
@@ -219,8 +220,19 @@ function makeShowList() {
     showLI.appendChild(showSum);
 
     showUL.appendChild(showLI);
+
+    play.addEventListener("click", () => {
+      let selectedEpisode = show.id;
+      getUrl(selectedEpisode);
+    });
   });
 }
 
-function returnHome() {}
+let returnButton = document.createElement("button");
+returnButton.setAttribute("id", "home");
+divSelectAndSearchEpisodes.appendChild(returnButton);
+returnButton.addEventListener("click", () => {
+  location.reload();
+});
+
 window.onload = setup;
