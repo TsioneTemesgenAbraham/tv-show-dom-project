@@ -1,25 +1,90 @@
-/* #root {
-  
-  background-color: darkslategrey;
-} */
+@import url('https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&display=swap');
 
-#myInput {
-  /* background-image: url('/css/searchicon.png'); */
-  /* Add a search icon to input */
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+
+* #root {
+  font-family: 'Hind', sans-serif;
+  background-color: #1A1A1D;
+} 
+
+body{
+  background-color: #1A1A1D;
+  font-family: 'Hind', sans-serif;
+}
+
+
+.title {
+  position: relative;
+  margin: 80px 40px 0px 250px;
+  font-size: 200px;
+  font-weight: 600;
+  font-family: 'Roboto', sans-serif;
+  color: #6F2232;
+  text-transform: uppercase;
+  text-shadow: 1px 1px 0px #957dad,
+               1px 2px 0px #957dad,
+               1px 3px 0px #957dad,
+               1px 4px 0px #957dad,
+               1px 5px 0px #957dad,
+               1px 6px 0px #957dad,
+               1px 10px 5px rgba(16, 16, 16, 0.5),
+               1px 15px 10px rgba(16, 16, 16, 0.4),
+               1px 20px 30px rgba(16, 16, 16, 0.3),
+               1px 25px 50px rgba(16, 16, 16, 0.2);
+
+}
+
+
+.myInput {
+  background-image: url('/css/searchicon.png');
   background-position: 10px 12px;
-  /* Position the search icon */
   background-repeat: no-repeat;
-  /* Do not repeat the icon image */
-  width: 50%;
-  /* Full-width */
+  width: 30%;
   font-size: 16px;
-  /* Increase font-size */
   padding: 12px 20px 12px 40px;
-  /* Add some padding */
   border: 1px solid #ddd;
-  /* Add a grey border */
-  margin: 40px 10px 40px 100px;
-  /* Add some space below the input */
+  margin: 200px 10px 40px 160px;
+
+}
+
+#myShowInput {
+  position: absolute;
+  background-position: 10px 12px;
+  background-repeat: no-repeat;
+  width: 30%;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin: 100px 10px 40px 800px;
+}
+
+#selectShow {
+  position: absolute;
+  background-position: 10px 12px;
+  background-repeat: no-repeat;
+  width: 30%;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin: 100px 10px 40px 220px;
+
+}
+
+ #selectEpi {
+  background-position: 10px 12px;
+  background-repeat: no-repeat;
+  width: 30%;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin: 80px 10px 200px 200px;
 }
 
 .listE {
@@ -46,14 +111,6 @@
 }
 
 
-.hide{
-  display: none;
-}
-
-#home {
-  background-color: #1A1A1D;
-}
-
 
 .show {
   list-style: none;
@@ -64,15 +121,8 @@
   padding: 50px;
   border: 2px solid;
   background-color: #6F2232;
-
-
+  
 }
-
-
-
-
-
-
 
 .show img {
   grid-area: 1/1/1/1;
@@ -90,7 +140,7 @@
 
 .show p span {
   grid-area: 1/2/1/2;
-  margin: 95px 70px 10px 50px;
+  margin: 105px 70px 10px 50px;
 }
 
 .show h3 {
@@ -100,12 +150,13 @@
 
 .show h4 {
   grid-area: 1/2/1/2;
-  margin: 138px 70px 10px 100px;
+  margin: 158px 70px 10px 100px;
 }
 
 
 
 .button.play {
+  position: relative;
   grid-area: 1/2/1/2;
   box-sizing: border-box;
   width: 74px;
@@ -119,3 +170,19 @@
   box-shadow: 5px 10px 8px 10px #202020;
 }
 
+#topPart2 {
+  background-color: #1A1A1D;
+  /* margin: 20px; */
+  height: 23rem;
+  background-image: none;
+}
+
+
+.return{
+  position: absolute;
+  padding: 4px;
+  font-size: 30px;
+  background-color: #6F2232;
+  border: 4px solid #a2263f;
+  margin: -85px 2px 2px 60px;
+}

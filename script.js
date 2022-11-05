@@ -1,11 +1,13 @@
 //You can edit ALL of the code here
-// const home = document.getElementById("home");
+
 const rootElem = document.getElementById("root");
-const searchBox = document.getElementById("myInput");
+const searchBox = document.getElementById("myShowInput");
 const display = document.getElementById("display-label");
 const divSelectAndSearchEpisodes = document.getElementById("top-part");
 const topDivShowDropdown = document.getElementById("topPart2");
 const home = document.getElementById("home");
+
+const allShows = getAllShows();
 
 // LEVEL 350  ------ MAKING A GET REQUEST ------
 
@@ -21,33 +23,24 @@ function getUrl(showValue) {
       data.forEach((ep) => {
         allEpiFromUrl.push(ep);
       });
+
       rootElem.innerText = " ";
       divTop.innerText = " ";
       searchBox.innerText = " ";
       display.innerHTML = " ";
 
+      searchEpisodes(allEpiFromUrl);
       makePageForEpisodes(allEpiFromUrl);
       dropdownEpi(allEpiFromUrl);
-      searchEpisodes(allEpiFromUrl);
-      console.log(allEpiFromUrl);
     });
 }
 
-const allShows = getAllShows();
-
 function setup() {
   dropdownShow(allShows);
+  searchShows(allShows);
   makeShowList(allShows);
-
-  searchEpisodes(allShows);
+  // slideShow(allShows);
 }
-
-// const allEpisodes = getAllEpisodes();
-// function setup() {
-//   makePageForEpisodes(allEpisodes);
-//   dropdownEpi(allEpisodes);
-
-// }
 
 // LEVEL 100   ------ EPISODE DISPLAY -----
 
@@ -88,6 +81,8 @@ function makePageForEpisodes(episodeList) {
     summaryEpi.innerHTML = episode.summary;
     liEpisodes.appendChild(summaryEpi);
     ulEpisodes.appendChild(liEpisodes);
+
+    // divSelectAndSearchEpisodes.style.backgroundImage = `url(${episode.image.medium})`;
   });
 }
 
@@ -97,22 +92,25 @@ var inputs = document.getElementById("myInput");
 function searchEpisodes(allEpisodes) {
   inputs.addEventListener("input", (e) => {
     let value = e.target.value.toLowerCase();
-    let visibleEpi = allEpisodes.filter((epidata) => {
+    console.log(value);
+    let visibleE = allEpisodes.filter((epis) => {
       return (
-        epidata.name.toLowerCase().includes(value) ||
-        epidata.summary.toLowerCase().includes(value)
+        epis.name.toLowerCase().includes(value) ||
+        epis.summary.toLowerCase().includes(value)
       );
     });
     rootElem.innerHTML = "";
-    makePageForEpisodes(visibleEpi);
+    makePageForEpisodes(visibleE);
     var display = document.getElementById("display-label");
+    display.style.color = "white";
     display.innerHTML = "";
     display.innerHTML =
-      "Displaying : " + visibleEpi.length + "/" + allEpisodes.length;
+      "Displaying : " + visibleE.length + "/" + allEpisodes.length;
   });
 }
 
 // LEVEL 300 ----- DROPDOWN OPTIONS -----
+
 var divTop = document.getElementById("selectEpi");
 function dropdownEpi(allEpisodes) {
   for (var i = 0; i < allEpisodes.length; i++) {
@@ -145,6 +143,8 @@ function dropdownEpi(allEpisodes) {
     makePageForEpisodes(selectedEpisode);
 
     var display = document.getElementById("display-label");
+    display.style.color = "white";
+    display.innerHTML = "";
     display.innerHTML =
       "Displaying : " + selectedEpisode.length + "/" + allEpisodes.length;
   });
@@ -172,12 +172,13 @@ function dropdownShow() {
 
   divShow.addEventListener("change", function () {
     let showValue = this.value;
-
     getUrl(showValue);
   });
 }
 
-function makeShowList() {
+// LEVEL 500 ----- SHOW DISPLAY -----
+
+function makeShowList(allShows) {
   divSelectAndSearchEpisodes.style.display = "none";
   let showUL = document.createElement("ul");
   home.appendChild(showUL);
@@ -222,17 +223,58 @@ function makeShowList() {
     showUL.appendChild(showLI);
 
     play.addEventListener("click", () => {
-      let selectedEpisode = show.id;
+      var selectedEpisode = show.id;
+      rootElem.innerHTML = "";
       getUrl(selectedEpisode);
     });
   });
 }
 
+// LEVEL 500 ----- SEARCH BOX FOR SHOW -----
+function searchShows() {
+  searchBox.addEventListener("input", (event) => {
+    let values = event.target.value.toLowerCase();
+    console.log(values);
+    let visibleShow = allShows.filter((shows) => {
+      return (
+        shows.name.toLowerCase().includes(values) ||
+        shows.summary.toLowerCase().includes(values) ||
+        shows.genres.includes(values)
+      );
+    });
+    console.log(visibleShow);
+    home.innerHTML = "";
+    makeShowList(visibleShow);
+    var displays = document.getElementById("display-label2");
+    displays.style.color = "white";
+    displays.innerHTML = "";
+    displays.innerHTML =
+      "Displaying : " + visibleShow.length + "/" + allShows.length;
+  });
+}
+
+// LEVEL 500 ----- RETURN BUTTON -----
+
 let returnButton = document.createElement("button");
+let tag = document.createElement("i");
+tag.setAttribute("class", "fa fa-home");
 returnButton.setAttribute("id", "home");
+returnButton.className = "return";
+returnButton.appendChild(tag);
 divSelectAndSearchEpisodes.appendChild(returnButton);
 returnButton.addEventListener("click", () => {
   location.reload();
 });
+
+// function slideShow(allShows) {
+//   let images = [];
+//   allShows.filter((shows) => {
+//     // let showIm = document.createElement("img");
+//     showIm.src = shows.image.medium;
+//     topDivShowDropdown.style.backgroundImage = `url(${shows.image.medium})`;
+//   });
+
+//   console.log(images);
+// }
 
 window.onload = setup;
