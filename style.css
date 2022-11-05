@@ -28,12 +28,12 @@ body{
   font-family: 'Roboto', sans-serif;
   color: #6F2232;
   text-transform: uppercase;
-  text-shadow: 1px 1px 0px #957dad,
-               1px 2px 0px #957dad,
-               1px 3px 0px #957dad,
-               1px 4px 0px #957dad,
-               1px 5px 0px #957dad,
-               1px 6px 0px #957dad,
+  text-shadow: 1px 1px 0px rgb(185, 167, 167),
+               1px 2px 0px rgb(185, 167, 167),
+               1px 3px 0px rgb(185, 167, 167),
+               1px 4px 0px rgb(185, 167, 167),
+               1px 5px 0px rgb(185, 167, 167),
+               1px 6px 0px rgb(185, 167, 167),
                1px 10px 5px rgba(16, 16, 16, 0.5),
                1px 15px 10px rgba(16, 16, 16, 0.4),
                1px 20px 30px rgba(16, 16, 16, 0.3),
@@ -47,70 +47,83 @@ body{
   background-position: 10px 12px;
   background-repeat: no-repeat;
   width: 30%;
-  font-size: 16px;
+  font-size: 20px;
   padding: 12px 20px 12px 40px;
   border: 1px solid #ddd;
-  margin: 200px 10px 40px 160px;
+  margin: 100px 10px -13px 128px;
+  border-radius: 10px;
 
 }
 
 #myShowInput {
   position: absolute;
   background-position: 10px 12px;
-  background-repeat: no-repeat;
   width: 30%;
-  font-size: 16px;
+  font-size: 20px;
   padding: 12px 20px 12px 40px;
   border: 1px solid #ddd;
   margin: 100px 10px 40px 800px;
+  border-radius: 10px;
 }
 
 #selectShow {
   position: absolute;
   background-position: 10px 12px;
-  background-repeat: no-repeat;
   width: 30%;
-  font-size: 16px;
+  font-size: 20px;
   padding: 12px 20px 12px 40px;
   border: 1px solid #ddd;
   margin: 100px 10px 40px 220px;
-
+  border-radius: 10px;
 }
 
  #selectEpi {
   background-position: 10px 12px;
-  background-repeat: no-repeat;
   width: 30%;
-  font-size: 16px;
+  font-size: 20px;
   padding: 12px 20px 12px 40px;
   border: 1px solid #ddd;
-  margin: 80px 10px 200px 200px;
+  margin: 20px 10px -13px 220px;
+  border-radius: 10px;
 }
 
 .listE {
+  list-style: none;
   display: grid;
-  grid-template-rows: 1fr 1fr ;
-  grid-template-columns: 1fr 1fr 1fr ;
-  width: 72%;
-  background-color: #888;
-  margin: 20px 40px 10px 80px;
-  border: 1px solid #000;
-  border-radius: 10%;
-
+  grid-template-columns: 2fr;
+  width: auto;
+  margin: 130px 210px 50px 210px;
+  padding: 50px;
+  border: 2px solid;
+  background-color: #6F2232;
+  border-radius: 20px;
+  box-shadow: 5px 10px rgb(185, 167, 167);
 }
 
-.listE > h1{
-  padding: 20px;
-  font-size: 1.4em;
+.listE h1{
+  /* padding: 20px; */
+  font-size: 1.8em;
   color: #fff;
-  grid-template-areas: 1/ 2/ 2/ 3;
+  grid-area: 1/2/1/2;
+  margin: 5px 20px 10px 98px;
 }
 
-.listE > h2 {
-  grid-template-areas: 2/ 2/ 3/ 3 ;
+.listE h2 {
+  grid-area: 1/2/1/2;
+  margin: 60px 70px 0px 98px;
+  font-size: 1.7em;
+  color:rgb(185, 167, 167);
 }
-
-
+.listE p {
+  width: 90%;
+  grid-area: 1/2/1/2;
+  font-size: 1.1em;
+  margin: 60px 30px 0px 50px;
+  color: rgb(185, 167, 167);
+}
+.listE img {
+  margin-top: 50px;
+}
 
 .show {
   list-style: none;
@@ -119,13 +132,16 @@ body{
   width: auto;
   margin: 100px 210px 50px 210px;
   padding: 50px;
-  border: 2px solid;
+  box-shadow: 5px 10px rgb(185, 167, 167);
   background-color: #6F2232;
+  border-radius: 20px;
+  color: rgb(185, 167, 167);
   
 }
 
 .show img {
   grid-area: 1/1/1/1;
+  margin-top: 50px;
 }
 
 .show h1 {
@@ -135,12 +151,14 @@ body{
 
 .show p {
   grid-area: 1/2/1/2;
-  margin: 90px 70px 10px 50px;
+  margin: 120px 70px 10px 50px;
+  font-size: 1.2rem;
 }
 
 .show p span {
   grid-area: 1/2/1/2;
-  margin: 105px 70px 10px 50px;
+  margin: 100px 70px 10px 50px;
+  font-size: 1.2rem;
 }
 
 .show h3 {
@@ -149,8 +167,10 @@ body{
 }
 
 .show h4 {
+  position: relative;
   grid-area: 1/2/1/2;
-  margin: 158px 70px 10px 100px;
+  margin: 198px 70px 80px 100px;
+  font-size: 1.2rem;
 }
 
 
@@ -161,28 +181,54 @@ body{
   box-sizing: border-box;
   width: 74px;
   height: 74px;
-  margin: 50px 20px 10px 550px;
+  margin: 70px 20px 10px 590px;
   border-style: solid;
   border-width: 37px;
-  border-color: #202020;
+  border-color: #1A1A1D;
   border-width: 37px 0px 37px 74px;
-  border-color: #6F2232 #6F2232 #6F2232 black;
-  box-shadow: 5px 10px 8px 10px #202020;
+  border-color: #6F2232 #6F2232 #6F2232 #1A1A1D;
+  box-shadow: 5px 10px 8px 10px #1A1A1D;
 }
 
 #topPart2 {
   background-color: #1A1A1D;
   /* margin: 20px; */
-  height: 23rem;
+  height: 27rem;
   background-image: none;
 }
 
+#top-part{
+  background-repeat: no-repeat;
+  
+}
 
-.return{
-  position: absolute;
+
+.return {
+  /* position: absolute; */
   padding: 4px;
   font-size: 30px;
   background-color: #6F2232;
   border: 4px solid #a2263f;
-  margin: -85px 2px 2px 60px;
+  margin: -40px 2px 2px 60px;
+}
+
+.display-label2{
+  margin: 230px 20px 20px 500px;
+  font-size: 25px;
+  font-weight: 700;
+  color:#888;
+
+}
+
+.display-label {
+  
+  margin: 90px 20px -100px 500px;
+  font-size: 25px;
+  font-weight: 700;
+  color: #888;
+
+}
+
+footer{
+  margin-top: 100px;
 }

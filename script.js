@@ -39,7 +39,6 @@ function setup() {
   dropdownShow(allShows);
   searchShows(allShows);
   makeShowList(allShows);
-  // slideShow(allShows);
 }
 
 // LEVEL 100   ------ EPISODE DISPLAY -----
@@ -51,7 +50,7 @@ function makePageForEpisodes(episodeList) {
 
   episodeList.map((episode) => {
     var liEpisodes = document.createElement("li");
-    liEpisodes.className = "show";
+    liEpisodes.className = "listE";
 
     //    FOR MEDIUM IMG
 
@@ -77,7 +76,7 @@ function makePageForEpisodes(episodeList) {
 
     //    FOR SUMMARY
 
-    var summaryEpi = document.createElement("div");
+    var summaryEpi = document.createElement("p");
     summaryEpi.innerHTML = episode.summary;
     liEpisodes.appendChild(summaryEpi);
     ulEpisodes.appendChild(liEpisodes);
@@ -102,10 +101,13 @@ function searchEpisodes(allEpisodes) {
     rootElem.innerHTML = "";
     makePageForEpisodes(visibleE);
     var display = document.getElementById("display-label");
-    display.style.color = "white";
     display.innerHTML = "";
     display.innerHTML =
-      "Displaying : " + visibleE.length + "/" + allEpisodes.length;
+      "Displaying  " +
+      visibleE.length +
+      " episodes out of " +
+      allEpisodes.length +
+      " episodes";
   });
 }
 
@@ -119,15 +121,15 @@ function dropdownEpi(allEpisodes) {
 
     var numList = " ";
     if (allEpisodes[i].number < 10) {
-      numList = `E0${allEpisodes[i].number}`;
-    } else numList = `E${allEpisodes[i].number}`;
+      numList = ` E0${allEpisodes[i].number}    `;
+    } else numList = ` E${allEpisodes[i].number}    `;
 
     opt.innerHTML =
       "S0" +
       allEpisodes[i].season +
       "-" +
       numList +
-      "   ---   " +
+      "   -    " +
       allEpisodes[i].name;
     divTop.appendChild(opt);
   }
@@ -143,10 +145,13 @@ function dropdownEpi(allEpisodes) {
     makePageForEpisodes(selectedEpisode);
 
     var display = document.getElementById("display-label");
-    display.style.color = "white";
     display.innerHTML = "";
     display.innerHTML =
-      "Displaying : " + selectedEpisode.length + "/" + allEpisodes.length;
+      "Displaying  " +
+      selectedEpisode.length +
+      " episodes out of " +
+      allEpisodes.length +
+      " episodes";
   });
 }
 
@@ -246,10 +251,13 @@ function searchShows() {
     home.innerHTML = "";
     makeShowList(visibleShow);
     var displays = document.getElementById("display-label2");
-    displays.style.color = "white";
     displays.innerHTML = "";
     displays.innerHTML =
-      "Displaying : " + visibleShow.length + "/" + allShows.length;
+      "Displaying   " +
+      visibleShow.length +
+      " shows out of " +
+      allShows.length +
+      " shows";
   });
 }
 
@@ -265,16 +273,5 @@ divSelectAndSearchEpisodes.appendChild(returnButton);
 returnButton.addEventListener("click", () => {
   location.reload();
 });
-
-// function slideShow(allShows) {
-//   let images = [];
-//   allShows.filter((shows) => {
-//     // let showIm = document.createElement("img");
-//     showIm.src = shows.image.medium;
-//     topDivShowDropdown.style.backgroundImage = `url(${shows.image.medium})`;
-//   });
-
-//   console.log(images);
-// }
 
 window.onload = setup;
