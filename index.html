@@ -3,19 +3,42 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TV Show Project | My Name (My GitHub username)</title>
+    <title>TV Show Project | Tsione Abraham (TsioneTemesgenAbraham)</title>
     <link href="style.css" rel="stylesheet" />
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
 
   <body>
-    <div id="root">
+    <!-- <h1>Game of Throne</h1> -->
+    <div id="topPart2">
+      <h1 class="title">TV SHOW</h1>
+      <select name="dropdown" id="selectShow" >
+        <option value="" disabled selected>Select show</option>
+      </select>
+      <input type="search" id="myShowInput" placeholder="Search for shows..">
+      <p id="display-label2" class="display-label2"></p>
     </div>
 
+    <div id="top-part"> 
+      <h1 class="title">TV SHOW</h1>
+      <select name= "dropdown" id="selectEpi" placeholder="Select episode">
+        <option value="" disabled selected>Select episode</option>
+      </select>
+      <input type="search" id="myInput" class="myInput" placeholder="Search for episodes..">
+      <p id="display-label"  class="display-label"></p>
+
+    </div>
+    <div id="root">
+    </div>
+    <div id="home"></div>
     <!-- Loads a provided function called getAllEpisodes() which returns all episodes -->
     <script src="episodes.js"></script>
 
     <!-- Loads YOUR javascript code -->
+    <script src="shows.js"></script>
     <script src="script.js"></script>
+
+    <footer>All these data have come from <a href="https://www.tvmaze.com/">TVMaze.com</a></footer>
   </body>
 </html>
